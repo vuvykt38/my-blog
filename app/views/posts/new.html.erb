@@ -1,3 +1,5 @@
+<h1>Create New Post</h1>
+
 <%= form_with scope: :post, url: posts_path, local: true do |form| %>
 
   <% if @post.errors.any? %>
@@ -14,19 +16,17 @@
     </div>
   <% end %>
 
-  <p>
+  <div class="form-group">
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
 
-  <p>
+  <div class="form-group">
     <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
+    <%= form.text_area :body, class: "form-control" %>
+  </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
+  <%= form.submit(class: "btn btn-primary")  %>
 <% end %>
 
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', root_path, class: 'btn' %>
