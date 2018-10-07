@@ -8,4 +8,38 @@
   <%= @post.body %>
 </p>
 
+<h2>Comment</h2>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>Username:</strong>
+    <%= comment.username %>
+  </p>
+  <p>
+    <strong>Body:</strong>
+    <%= comment.body %>
+  </p>
+
+  <p>
+    <%= link_to 'Delete Comment', [comment.post, comment],
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end -%>
+
+<h2>Add a comment:</h2>
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :username %><br>
+    <%= form.text_field :username %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
