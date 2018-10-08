@@ -1,3 +1,7 @@
 <h1>Wellcome to my blog!</h1>
-<%= link_to 'My Blog', controller: 'posts' %>
-<%= link_to 'New Post', new_post_path %>
+<br>
+<%= link_to 'My Blog', controller: 'posts' %> |
+<%= link_to 'New Post', new_post_path %> |
+<%= link_to 'Sign Up', new_user_registration_path %> |
+<%= link_to 'Log In', new_user_session_path %> |
+<%= link_to 'Log Out', destroy_user_session_path, method: :delete %> |
