@@ -13,6 +13,11 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if current_user == @post.author
+      render 'edit'
+    else
+      redirect_to posts_path, flash: { error: 'You are not authorized to edit this post' }
+    end
   end
 
   def create
