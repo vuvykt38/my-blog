@@ -68,3 +68,8 @@ gem 'jquery-rails'
 
 # Use devise for user authentication
 gem 'devise'
+
+#Install WYSIWYG text editor
+gem 'tinymce-rails'
+
+
