@@ -32,6 +32,10 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    if current_user != @post.author
+      redirect_to(posts_path, flash: { error: 'You are not authorized to update this post' }) && return
+    end
+
     if @post.update(post_params)
       redirect_to @post
     else
