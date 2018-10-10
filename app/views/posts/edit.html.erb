@@ -16,20 +16,18 @@
     </div>
   <% end %>
 
-  <p>
+  <div class="form-group">
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
 
-  <p>
+  <div class="form-group">
     <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
+    <%= form.text_area :body, class: "form-control tinymce" %>
+    <%= tinymce %>
+  </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
+  <%= form.submit(class: "btn btn-primary")  %>
+  <%= link_to 'Back', root_path, class: 'btn' %>
 
 <% end %>
-
-<%= link_to 'Back', post_path %>
