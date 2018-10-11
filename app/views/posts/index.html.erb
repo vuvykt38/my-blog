@@ -13,7 +13,7 @@
       <h3><%= post.title %></h3>
       <p><%= post.body.html_safe %></p>
       <small><%= post.author.email %> | <%= time_ago_in_words(post.updated_at) %> |
-        <%= post.body.reading_time :format => :approx %></small>
+        <%= post.body.reading_time :format => :approx %> read</small>
       <br>
       <a class="btn btn-primary" href="<%= post_path(post) %>">Show</a>
       <% if current_user == post.author %>
