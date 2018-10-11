@@ -12,11 +12,15 @@
     <div class="col-md-8">
       <h3><%= post.title %></h3>
       <p><%= post.body.html_safe %></p>
+      <small><%= post.author.email %> | <%= time_ago_in_words(post.updated_at) %> | <%=  %></small>
+      <br>
       <a class="btn btn-primary" href="<%= post_path(post) %>">Show</a>
-      <a class="btn btn-success" href="<%= edit_post_path(post) %>">Edit</a>
-      <a class="btn btn-danger" href="<%= post_path(post) %>"
-              data-method="delete"
-              onclick="return confirm('Are you sure?')">Delete</a>
+      <% if current_user == post.author %>
+        <a class="btn btn-success" href="<%= edit_post_path(post) %>">Edit</a>
+        <a class="btn btn-danger" href="<%= post_path(post) %>"
+                data-method="delete"
+                onclick="return confirm('Are you sure?')">Delete</a>
+      <% end %>
     </div>
   </div>
   <!-- /.row -->
