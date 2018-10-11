@@ -72,4 +72,4 @@ gem 'devise'
 #Install WYSIWYG text editor
 gem 'tinymce-rails'
 
-
+gem 'readingtime'
