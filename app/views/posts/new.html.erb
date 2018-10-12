@@ -29,8 +29,6 @@
 
   <div class="form-group">
     <%= form.collection_select :category_id, Category.all, :id, :name, :prompt => "Select a Category" %>
-    or create one:
-    <%= form.text_field :new_category_name %>
   </div>
 
   <%= form.submit(class: "btn btn-primary")  %>
