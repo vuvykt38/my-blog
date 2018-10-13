@@ -11,27 +11,19 @@
 <h2>Comment</h2>
 <% @post.comments.each do |comment| %>
   <p>
-    <strong>Username:</strong>
-    <%= comment.username %>
-  </p>
-  <p>
-    <strong>Body:</strong>
+    <strong><%= comment.user&.full_name || 'Unnamed' %>:</strong>
     <%= comment.body %>
   </p>
 
   <p>
     <%= link_to 'Delete Comment', post_comment_path(post_id: @post.id, id: comment.id),
                  method: :delete,
-                 data: { confirm: 'Are you sure?' } %>
+                 data: { confirm: 'Are you sure?' } if current_user == @post.author %>
   </p>
 <% end -%>
 
 <h2>Add a comment:</h2>
 <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-  <p>
-    <%= form.label :username %><br>
-    <%= form.text_field :username %>
-  </p>
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
