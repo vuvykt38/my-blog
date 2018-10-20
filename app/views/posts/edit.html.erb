@@ -22,9 +22,18 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :status %><br>
+    <%= form.select :status, Post::STATUSES, include_blank: true %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :body %><br>
     <%= form.text_area :body, class: "form-control tinymce" %>
     <%= tinymce %>
+  </div>
+
+  <div class="form-group">
+    <%= form.collection_select :category_id, Category.all, :id, :name, :prompt => "Select a Category" %>
   </div>
 
   <%= form.submit(class: "btn btn-primary")  %>

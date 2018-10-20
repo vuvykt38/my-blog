@@ -7,6 +7,8 @@ class PostsController < ApplicationController
     else
       @posts = Post.all
     end
+
+    @posts = @posts.posts_for(current_user)
   end
 
   def show
@@ -57,6 +59,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :body, :category_id)
+      params.require(:post).permit(:title, :body, :category_id, :status)
     end
 end
