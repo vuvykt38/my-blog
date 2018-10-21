@@ -1,6 +1,25 @@
 <!-- Page Heading -->
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link active" href="#"></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="<%= posts_path %>">All</a>
+      <%- Category.all.each do |category| %>
+        <a class="dropdown-item" href="<%= posts_path(category_id: category.id) %>"><%= category.name %></a>
+      <% end %>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>
 <h1 class="my-4">Listing Posts</h1>
-
 <!-- Project One -->
 <% @posts.each do |post| %>
   <div class="row">
