@@ -7,5 +7,5 @@ class Post < ApplicationRecord
                     length: { minimum: 5 }
   validates_inclusion_of :status, in: STATUSES
 
-  scope :posts_for, ->(user) { where('status = ? OR user_id = ?', 'public', user.id) }
+  scope :posts_for, ->(user) { where('status = ? OR user_id = ?', 'public', user&.id) }
 end
