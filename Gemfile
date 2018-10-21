@@ -73,3 +73,6 @@ gem 'devise'
 gem 'tinymce-rails'
 
 gem 'readingtime'
+
+# Active Admin
+gem 'activeadmin'
