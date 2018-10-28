@@ -76,3 +76,6 @@ gem 'readingtime'
 
 # Active Admin
 gem 'activeadmin'
+
+# Upload files
+gem 'carrierwave', '~> 1.2', '>= 1.2.3'
