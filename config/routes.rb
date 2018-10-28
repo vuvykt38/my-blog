@@ -6,5 +6,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  resources :profiles, only: [:show, :edit, :update]
+
   root 'welcome#index'
 end
