@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to @post, flash: { success: 'Post updated' }
     else
       render 'edit'
     end
