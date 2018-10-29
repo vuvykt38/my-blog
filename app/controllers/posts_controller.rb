@@ -4,8 +4,11 @@ class PostsController < ApplicationController
   def index
     if params[:category_id]
       @posts = Post.where(category_id: params[:category_id])
+                   .page(Integer(params[:page] || 1))
+                   .per(10)
     else
-      @posts = Post.all
+      @posts = Post.page(Integer(params[:page] || 1))
+                   .per(10)
     end
 
     @posts = @posts.posts_for(current_user)
