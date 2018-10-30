@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   validates :title, presence: true,
                     length: { minimum: 5 }
   validates_inclusion_of :status, in: STATUSES
+  mount_uploader :image, ImageUploader
 
   scope :posts_for, ->(user) { where('status = ? OR user_id = ?', 'public', user&.id) }
 end

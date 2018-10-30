@@ -6,7 +6,12 @@
     <h1>
       <%= @post.title %>
     </h1>
-
+    <div class="pt-3">
+        <img class="img-fluid rounded mb-3 mb-md-0"
+             src="<%= @post.image.url %>"
+             height="400" width="700"
+             alt="post_image">
+    </div>
     <p>
       <%= @post.body.html_safe %>
     </p>

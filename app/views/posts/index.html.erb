@@ -3,10 +3,11 @@
 <!-- Project One -->
 <% @posts.each do |post| %>
   <div class="row">
-    <div class="col-md-4">
-      <a href="#">
-        <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-      </a>
+    <div class="col-md-4 ">
+      <img class="img-fluid rounded mb-3 mb-md-0 "
+           src="<%= post.image.url %>"
+           height="400" width="700"
+           alt="post_image">
     </div>
     <div class="col-md-8">
       <h3><%= post.title %></h3>
@@ -16,8 +17,14 @@
           ...
         <% end %>
       </p>
-      <small><%= post.author.full_name %> | <%= time_ago_in_words(post.updated_at) %> ago |
-        <%= post.body.reading_time :format => :approx %> read</small>
+      <div>
+        <img src="<%= post.author.avatar.url %>"
+             class="rounded-circle float"
+             alt="avatar"
+             height="24" width="24">
+        <small class="ml-1"><%= post.author.full_name %> · <%= time_ago_in_words(post.updated_at) %> ago</small> ·
+        <small><%= post.body.reading_time :format => :approx %> read</small>
+      </div>
       <br>
       <a class="btn btn-primary" href="<%= post_path(post) %>">Show</a>
       <% if current_user == post.author %>
