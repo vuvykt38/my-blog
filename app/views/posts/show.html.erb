@@ -1,6 +1,6 @@
 <div class="row content">
   <div class="col-2"></div>
-  <div class="col-8T">
+  <div class="col-8">
     <small><%= @post.author.full_name %> | <%= time_ago_in_words(@post.updated_at) %> ago |
             <%= @post.body.reading_time :format => :approx %> read</small>
     <h1>

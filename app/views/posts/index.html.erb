@@ -11,13 +11,13 @@
     </div>
     <div class="col-md-8">
       <h3><%= post.title %></h3>
-      <p>
-        <%= post.body.first(100).html_safe %>
+      <div class="row p-1">
+        <%= post.body[0..99].html_safe %>
         <% if post.body.size > 100 %>
           ...
         <% end %>
-      </p>
-      <div>
+      </div>
+      <div class="row p-1">
         <img src="<%= post.author.avatar.url %>"
              class="rounded-circle float"
              alt="avatar"
@@ -25,14 +25,15 @@
         <small class="ml-1"><%= post.author.full_name %> · <%= time_ago_in_words(post.updated_at) %> ago</small> ·
         <small><%= post.body.reading_time :format => :approx %> read</small>
       </div>
-      <br>
-      <a class="btn btn-primary" href="<%= post_path(post) %>">Show</a>
-      <% if current_user == post.author %>
-        <a class="btn btn-success" href="<%= edit_post_path(post) %>">Edit</a>
-        <a class="btn btn-danger" href="<%= post_path(post) %>"
-                data-method="delete"
-                onclick="return confirm('Are you sure?')">Delete</a>
-      <% end %>
+      <div class="row p-1">
+        <a class="btn btn-primary" href="<%= post_path(post) %>">Show</a>
+        <% if current_user == post.author %>
+          <a class="btn ml-1 mr-1 btn-success" href="<%= edit_post_path(post) %>">Edit</a>
+          <a class="btn btn-danger" href="<%= post_path(post) %>"
+                  data-method="delete"
+                  onclick="return confirm('Are you sure?')">Delete</a>
+        <% end %>
+      </div>
     </div>
   </div>
   <!-- /.row -->
