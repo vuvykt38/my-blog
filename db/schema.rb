@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_143018) do
+ActiveRecord::Schema.define(version: 2018_11_01_135420) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(version: 2018_10_30_143018) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "post_id"
+    t.bigint "commentable_id"
     t.bigint "user_id"
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.string "commentable_type"
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_143018) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
