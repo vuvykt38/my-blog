@@ -82,3 +82,6 @@ gem 'carrierwave', '~> 1.2', '>= 1.2.3'
 
 # Image resize
 gem 'rmagick', '~> 2.16'
+
+# Create a share feature
+gem 'social-share-button'
