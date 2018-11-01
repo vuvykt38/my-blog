@@ -3,46 +3,61 @@
   <div class="col-8">
     <small><%= @post.author.full_name %> | <%= time_ago_in_words(@post.updated_at) %> ago |
             <%= @post.body.reading_time :format => :approx %> read</small>
-    <h1>
-      <%= @post.title %>
-    </h1>
+    <div class="pt-5">
+      <h1><%= @post.title %></h1>
+    </div>
     <div class="pt-3">
-        <img class="img-fluid rounded mb-3 mb-md-0"
+      <img class="img-fluid rounded mb-3 mb-md-0"
              src="<%= @post.image.url %>"
              height="400" width="700"
              alt="post_image">
     </div>
-    <p>
+
+    <div class="pt-3">
       <%= @post.body.html_safe %>
-    </p>
-
-    <h2>Comment</h2>
-    <% @post.comments.each do |comment| %>
-      <p>
-        <strong><%= comment.user&.full_name || 'Unnamed' %>:</strong>
-        <%= comment.body %>
-      </p>
-
-      <p>
-        <%= link_to 'Delete Comment', post_comment_path(post_id: @post.id, id: comment.id),
-                     method: :delete,
-                     data: { confirm: 'Are you sure?' } if current_user == @post.author %>
-      </p>
-    <% end -%>
-
-    <h2>Add a comment:</h2>
-    <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-      <p>
-        <%= form.label :body %><br>
-        <%= form.text_area :body %>
-      </p>
-      <p>
+    </div>
+    <div class="py-4">
+      <h5><%= @post.comments.size %> Comments</h5>
+      <% @post.comments.each do |comment| %>
+      <div class="row">
+        <div class="col-0.5">
+          <img src="<%= comment.user.avatar.url %>"
+               class="rounded-circle float"
+               alt="avatar"
+               height="24" width="24">
+          </div>
+          <div class="col-11 pb-3">
+            <div class="row">
+              <strong class="ml-2"><%= comment.user&.full_name || 'Unnamed' %></strong>
+            </div>
+            <div class="row py-2">
+              <%= comment.body %>
+            </div>
+            <div class="row">
+              <small><%= time_ago_in_words(comment.updated_at.to_s(:short_ordinal)) %> ago |
+                <%= link_to 'Delete Comment', post_comment_path(post_id: @post.id, id: comment.id),
+                             method: :delete,
+                             data: { confirm: 'Are you sure?' } if current_user == @post.author %>
+              </small>
+          </div>
+        </div>
+      </div>
+      <% end -%>
+    </div>
+    <h5>Responses</h5>
+    <%= form_with(model: [ @post, @post.comments.build ]) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :body, class: "form-control", placeholder: "Write a responses..." %>
+      </div>
+      <div class="form-actions">
         <%= form.submit %>
-      </p>
+      </div>
+      <div class="col-2"></div>
     <% end %>
-
-    <%= link_to 'Edit', edit_post_path(@post) %> |
-    <%= link_to 'Back', posts_path %>
+    <div class="py-2">
+      <%= link_to 'Edit', edit_post_path(@post) %> |
+      <%= link_to 'Back', posts_path %>
+    </div>
   </div>
   <div class="col-2"></div>
 </div>
