@@ -17,3 +17,4 @@
 //= require activestorage
 //= require turbolinks
 //= require tinymce
+//= require social-share-button
