@@ -10,10 +10,12 @@
            alt="post_image">
     </div>
     <div class="col-md-8">
-      <h3><%= post.title %></h3>
       <div class="row p-1">
-        <%= post.body[0..99].html_safe %>
-        <% if post.body.size > 100 %>
+      <h3><%= link_to post.title, post_path(post), class:"text-dark" %></h3>
+      </div>
+      <div class="row p-1">
+        <%= post.body[0..200].html_safe %>
+        <% if post.body.size > 200 %>
           ...
         <% end %>
       </div>
@@ -22,11 +24,9 @@
              class="rounded-circle float"
              alt="avatar"
              height="24" width="24">
-        <small class="ml-1"><%= post.author.full_name %> · <%= time_ago_in_words(post.updated_at) %> ago</small> ·
-        <small><%= post.body.reading_time :format => :approx %> read</small>
+        <small class="ml-1"><%= post.author.full_name %> · <%= time_ago_in_words(post.updated_at) %> ago · <%= post.body.reading_time :format => :approx %> read</small>
       </div>
       <div class="row p-1">
-        <a class="btn btn-primary" href="<%= post_path(post) %>">Show</a>
         <% if current_user == post.author %>
           <a class="btn ml-1 mr-1 btn-success" href="<%= edit_post_path(post) %>">Edit</a>
           <a class="btn btn-danger" href="<%= post_path(post) %>"
