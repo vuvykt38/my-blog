@@ -15,8 +15,11 @@
 
     <div class="pt-3">
       <%= @post.body.html_safe %>
-      <%= social_share_button_tag(@post.title) %>
+      <p>
+        <%= social_share_button_tag(@post.title) %>
+      </p>
     </div>
+
     <div class="py-4">
       <h5><%= @post.comments.size %> Comments</h5>
       <% @post.comments.each do |comment| %>
@@ -26,22 +29,40 @@
                class="rounded-circle float"
                alt="avatar"
                height="24" width="24">
-          </div>
-          <div class="col-11 pb-3">
-            <div class="row">
-              <strong class="ml-2"><%= comment.user&.full_name || 'Unnamed' %></strong>
-            </div>
-            <div class="row py-2">
-              <%= comment.body %>
-            </div>
-            <div class="row">
-              <small><%= time_ago_in_words(comment.updated_at.to_s(:short_ordinal)) %> ago |
-                <%= link_to 'Delete Comment', post_comment_path(post_id: @post.id, id: comment.id),
-                             method: :delete,
-                             data: { confirm: 'Are you sure?' } if current_user == @post.author %>
-              </small>
-          </div>
         </div>
+        <div class="col-11 pb-3">
+          <div class="row">
+            <strong class="ml-2"><%= comment.user&.full_name || 'Unnamed' %></strong>
+          </div>
+          <div class="row py-2">
+            <%= comment.body %>
+          </div>
+          <div class="row">
+
+            <% comment.comments.each do |reply| %>
+              <div class="row">
+                <strong class="ml-2"><%= reply.user&.full_name || 'Unnamed' %></strong>
+              </div>
+              <div class="row py-2">
+                <%= reply.body %>
+              </div>
+            <% end %>
+            <small><%= time_ago_in_words(comment.updated_at.to_s(:short_ordinal)) %> ago |
+
+                   <%= link_to 'reply', '',
+                               class: "reply",
+                               'comment-id': comment.id %>
+
+                   <%= link_to 'Delete Comment', post_comment_path(post_id: @post.id, id: comment.id),
+                           method: :delete,
+                           data: { confirm: 'Are you sure?' } if current_user == @post.author %>
+            </small>
+        </div>
+        <div class="row reply-for-<%= comment.id %>" style="display: none">
+          <textarea class=""></textarea>
+          <a href="#" class="submit-reply" comment-id='<%= comment.id %>'>Submit</a>
+        </div>
+      </div>
       </div>
       <% end -%>
     </div>
@@ -51,7 +72,7 @@
         <%= form.text_area :body, class: "form-control", placeholder: "Write a responses..." %>
       </div>
       <div class="form-actions">
-        <%= form.submit %>
+        <%= form.submit "Submit" %>
       </div>
       <div class="col-2"></div>
     <% end %>
@@ -62,3 +83,30 @@
   </div>
   <div class="col-2"></div>
 </div>
+
+
+<script type="text/javascript">
+  $(".reply").click(function(event) {
+    var id = event.target.getAttribute('comment-id');
+    $('.reply-for-' + id).show();
+    // event.stopPropagation();
+    event.preventDefault();
+  });
+
+  $(".submit-reply").click(function(event) {
+    var reply = $(event.target).parent().find('textarea')[0].value
+    var commentId = event.target.getAttribute('comment-id');
+    if (reply) {
+      sendReply(commentId, reply);
+    } else {
+      alert('Please enter your reply messages.')
+    }
+    event.preventDefault();
+  });
+
+  function sendReply(comment_id, reply_message) {
+    $.post('/posts/0/comments/' + comment_id + '/reply', { comment_id: comment_id, reply_message: reply_message }, function( data ) {
+      alert('commented');
+    });
+  }
+</script>

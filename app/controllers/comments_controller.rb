@@ -1,3 +1,4 @@
+
 class CommentsController < ApplicationController
   def create
     post = Post.find(params[:post_id])
@@ -7,6 +8,17 @@ class CommentsController < ApplicationController
       redirect_to post_path(post), flash: { success: 'Comment added' }
     else
       redirect_to post_path(post), flash: { error: comment.errors.full_messages.join('. ') }
+    end
+  end
+
+  def reply
+    comment = Comment.find(params[:id])
+    reply = comment.comments.new(body: params[:reply_message])
+    reply.user = current_user
+    if reply.save
+      render json: { message: 'successfully'}
+    else
+      render json: { message: 'errors'}, status: :unprocessable_entity
     end
   end
 

@@ -3,7 +3,16 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   resources :posts do
-    resources :comments
+    resources :comments, only: [:create, :destroy] do
+      member do
+        # update, edit, destroy
+        post :reply
+      end
+
+      collection do
+        # create, index
+      end
+    end
   end
 
   resources :profiles, only: [:show, :edit, :update]
