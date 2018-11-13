@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   end
 
   resources :profiles, only: [:show, :edit, :update]
+  resources :relationships, only: [:create] do
+    collection do
+      post :unfollow
+    end
+  end
 
   root 'posts#index'
 end

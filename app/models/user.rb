@@ -8,4 +8,9 @@ class User < ApplicationRecord
   validates :full_name, presence: true
 
   has_many :posts
+  has_many :relationships, foreign_key: :follower_id
+
+  def follow?(user)
+    relationships.exists?(followed_id: user.id)
+  end
 end

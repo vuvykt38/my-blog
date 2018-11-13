@@ -3,6 +3,13 @@
   <div class="col-8">
     <small><%= @post.author.full_name %> | <%= time_ago_in_words(@post.updated_at) %> ago |
             <%= @post.body.reading_time :format => :approx %> read</small>
+    <small>
+      <% if !current_user.follow?(@post.author) %>
+        <%= link_to 'Follow', relationships_path(user_id: @post.author.id), method: :post %>
+      <% else %>
+        <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @post.author.id), method: :post %>
+      <% end %>
+    </small>
     <div class="pt-5">
       <h1><%= @post.title %></h1>
     </div>
