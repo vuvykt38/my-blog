@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_153506) do
+ActiveRecord::Schema.define(version: 2018_11_13_143807) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -60,6 +60,17 @@ ActiveRecord::Schema.define(version: 2018_11_11_153506) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "image"
+    t.string "full_name"
+    t.string "title"
+    t.string "link"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -105,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_153506) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
