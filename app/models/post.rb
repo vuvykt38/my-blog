@@ -9,4 +9,19 @@ class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :posts_for, ->(user) { where('status = ? OR user_id = ?', 'public', user&.id) }
+
+  after_create :notify_followers
+
+  private
+
+  def notify_followers
+    author.followers.each do |user|
+      user.notifications.create(
+        title: "has posted a new post: #{title}",
+        full_name: author.full_name,
+        image: author.avatar.url,
+        link: Rails.application.routes.url_helpers.post_path(id)
+      )
+    end
+  end
 end

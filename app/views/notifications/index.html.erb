@@ -1,0 +1,23 @@
+<div class="row content">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <h1 class="my-4">Notifications</h1>
+    <% @notifications.each do |notification| %>
+      <div class="row my-4">
+        <img class="rounded-circle float mr-2" "
+               src="<%= notification.image %>"
+               height="30" width="30"
+               alt="post_image">
+        <a href="<%= notification.link %>">
+        <b><%= notification.full_name %></b> <span><%= notification.title %></span>
+          </a>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-2"></div>
+</div>
+
+<!-- Pagination -->
+<div class="pagination justify-content-center">
+  <%= paginate @notifications %>
+</div>
