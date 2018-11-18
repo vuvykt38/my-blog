@@ -8,12 +8,16 @@ class User < ApplicationRecord
   validates :full_name, presence: true
 
   has_many :posts
-  has_many :relationships, foreign_key: :follower_id
+
   has_many :follower_relationships, class_name: 'Relationship', foreign_key: :followed_id
-  has_many :followers, through: :follower_relationships
+  has_many :followers, through: :follower_relationships, source: :follower
+
+  has_many :following_relationships, class_name: 'Relationship', foreign_key: :follower_id
+  has_many :following_users, through: :following_relationships, source: :followed
+
   has_many :notifications
 
-  def follow?(user)
-    relationships.exists?(followed_id: user.id)
+  def following?(user)
+    following_relationships.exists?(followed_id: user.id)
   end
 end

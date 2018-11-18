@@ -11,7 +11,7 @@ class RelationshipsController < ApplicationController
   end
 
   def unfollow
-    relationship = current_user.relationships.find_by(followed_id: params[:user_id])
+    relationship = current_user.following_relationships.find_by(followed_id: params[:user_id])
 
     if relationship.destroy
       redirect_to request.referer || posts_path, flash: { success: 'Unfollowed' }

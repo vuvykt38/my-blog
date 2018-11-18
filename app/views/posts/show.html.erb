@@ -1,15 +1,38 @@
 <div class="row content">
   <div class="col-2"></div>
   <div class="col-8">
-    <small><%= @post.author.full_name %> | <%= time_ago_in_words(@post.updated_at) %> ago |
-            <%= @post.body.reading_time :format => :approx %> read</small>
-    <small>
-      <% if !current_user.follow?(@post.author) %>
-        <%= link_to 'Follow', relationships_path(user_id: @post.author.id), method: :post %>
-      <% else %>
-        <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @post.author.id), method: :post %>
-      <% end %>
-    </small>
+    <table>
+      <tr>
+        <td rowspan="2">
+          <small><img class="rounded-circle float mr-2" "
+               src="<%= @post.author.avatar.url %>"
+               height="40" width="40"
+               alt="post_image">
+          </small>
+        </td>
+        <td>
+          <small>
+            <strong><%= link_to @post.author.full_name, profile_path(@post.author.id), class:"text-dark" %></strong>
+            <span class="border rounded border-primary px-1 py-0.5 ml-1">
+            <% if !current_user.following?(@post.author) %>
+              <%= link_to 'Follow', relationships_path(user_id: @post.author.id), method: :post %>
+            <% else %>
+              <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @post.author.id), method: :post %>
+            <% end %>
+            </span>
+          </small>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <small>
+          <%= time_ago_in_words(@post.updated_at) %> ago |
+          <%= @post.body.reading_time :format => :approx %> read
+          </small>
+        </td>
+      </tr>
+    </table>
     <div class="pt-5">
       <h1><%= @post.title %></h1>
     </div>
@@ -56,9 +79,9 @@
             <% end %>
             <small><%= time_ago_in_words(comment.updated_at.to_s(:short_ordinal)) %> ago |
 
-                   <%= link_to 'reply', '',
+                   <%= link_to 'Reply', '',
                                class: "reply",
-                               'comment-id': comment.id %>
+                               'comment-id': comment.id %> |
 
                    <%= link_to 'Delete Comment', post_comment_path(post_id: @post.id, id: comment.id),
                            method: :delete,

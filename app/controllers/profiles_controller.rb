@@ -1,9 +1,11 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+  end
 
-  def edit; end
+  def edit;end
 
   def update
     if current_user.update(profile_params)
