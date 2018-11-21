@@ -1,27 +1,36 @@
 <div class="row content">
-  <div class="col-2"></div>
-  <div class="col-8">
-    <div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <div class="row my-2 ">
       <div class="col-9 mt-3">
         <div class="row">
           <h2><%= @user.full_name %></h2>
-          <small class="m-2 ml-3">
-            <% if current_user == @user %>
-              <%= link_to 'Edit Profile', edit_profile_path(@user), class: "border rounded border-primary p-1 "%>
-            <% end %>
-          </small>
-          </div>
-          <span class=""> <%= @user.bio %> </span>
-          <div class="my-3 text-secondary" >
-            <small>
-            <%= @user.followers.count %> Followers
-            <%= @user.following_users.count %> Following
+            <small class="m-2 ml-3">
+              <% if !current_user.following?(@user) %>
+                <%= link_to 'Follow', relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
+              <% else %>
+                <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
+              <% end %>
             </small>
-          </div>
+            <small class="m-2 ml-3">
+              <% if current_user == @user %>
+                <%= link_to 'Edit Profile', edit_profile_path(@user), class: "border rounded border-primary p-1 "%>
+              <% end %>
+            </small>
+        </div>
+        <div class="row my-2">
+            <span class=""> <%= @user.bio %> </span>
+        </div>
+        <div class="row text-secondary my-3" >
+              <small>
+              <strong><%= @user.followers.count %> </strong> <%= link_to 'Followers', followers_profile_path, class:"text-secondary mr-2" %>
+              <strong><%= @user.following_users.count %> </strong> <%= link_to 'Following', following_profile_path, class:"text-secondary" %>
+              </small>
+        </div>
       </div>
-      <div class="col-3">
+      <div class="col-3 mt-3">
         <img src="<%= @user.avatar.url %>" class="rounded-circle float-right" alt="avatar"
-             height="120" width="120">
+             height="100" width="100">
       </div>
     </div>
   </div>
