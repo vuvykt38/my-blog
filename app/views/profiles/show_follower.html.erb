@@ -1,0 +1,81 @@
+<div class="row content">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <div class="row my-2 ">
+      <div class="col-9 mt-3">
+        <div class="row">
+          <h2><%= @user.full_name %></h2>
+            <small class="m-2 ml-3">
+              <% if !current_user.following?(@user) %>
+                <%= link_to 'Follow', relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
+              <% else %>
+                <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
+              <% end %>
+            </small>
+            <small class="m-2 ml-3">
+              <% if current_user == @user %>
+                <%= link_to 'Edit Profile', edit_profile_path(@user), class: "border rounded border-primary p-1 "%>
+              <% end %>
+            </small>
+        </div>
+        <div class="row my-2">
+            <span class=""> <%= @user.bio %> </span>
+        </div>
+        <div class="row text-secondary my-3" >
+              <small>
+              <strong><%= @user.followers.count %> </strong> <%= link_to 'Followers', followers_profile_path, class:"text-secondary mr-2" %>
+              <strong><%= @user.following_users.count %> </strong> <%= link_to 'Following', following_profile_path, class:"text-secondary" %>
+              </small>
+        </div>
+      </div>
+      <div class="col-3 mt-3">
+        <img src="<%= @user.avatar.url %>" class="rounded-circle float-right" alt="avatar"
+             height="100" width="100">
+      </div>
+    </div>
+    <div class="row border-top">
+      <span class="my-3"><strong><%= @user.full_name %> is followed by</strong></span>
+    </div>
+      <% @user.followers.each do |follower| %>
+      <div class=" row border px-3 py-2 my-3">
+        <table>
+          <tr>
+            <td rowspan="3">
+              <small><img class="rounded-circle float mr-3" "
+                   src="<%= follower.avatar.url %>"
+                   height="60" width="60"
+                   alt="post_image">
+              </small>
+            </td>
+            <td>
+              <small>
+                <strong><%= link_to follower.full_name, following_profile_path, class:"text-dark" %></strong>
+              </small>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <small class="text-secondary"><%= follower.bio %></small>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <small>
+              <span>
+                <% if !current_user.following?(follower) %>
+                  <%= link_to 'Follow', relationships_path(user_id: @user), method: :post %>
+                <% else %>
+                  <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @user), method: :post %>
+                <% end %>
+              </span>
+              </small>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <% end %>
+  </div>
+  <div class="col-3"></div>
+</div>

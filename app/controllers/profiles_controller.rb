@@ -15,8 +15,19 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def following
+    @user = User.find(params[:id])
+    render 'show_following'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    render 'show_follower'
+  end
+
   private
     def profile_params
       params.permit(:full_name, :avatar, :bio)
     end
+
 end

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   resources :posts do
     resources :comments, only: [:create, :destroy] do
       member do
@@ -23,6 +25,13 @@ Rails.application.routes.draw do
   end
 
   resources :notifications, only: [:index]
+
+  resources :profiles do
+    member do
+      get :following
+      get :followers
+    end
+  end
 
   root 'posts#index'
 end
