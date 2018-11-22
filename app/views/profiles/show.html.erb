@@ -1,22 +1,22 @@
 <div class="row content">
   <div class="col-3"></div>
   <div class="col-6">
-    <div class="row my-2 ">
+    <div class="row my-2 pb-4 ">
       <div class="col-9 mt-3">
         <div class="row">
           <h2><%= @user.full_name %></h2>
-            <small class="m-2 ml-3">
-              <% if !current_user.following?(@user) %>
-                <%= link_to 'Follow', relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
-              <% else %>
-                <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
-              <% end %>
-            </small>
-            <small class="m-2 ml-3">
-              <% if current_user == @user %>
-                <%= link_to 'Edit Profile', edit_profile_path(@user), class: "border rounded border-primary p-1 "%>
-              <% end %>
-            </small>
+          <small class="m-2 ml-3">
+            <% if !current_user.following?(@user) %>
+              <%= link_to 'Follow', relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
+            <% else %>
+              <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @user), method: :post, class: "border rounded border-primary p-1 " %>
+            <% end %>
+          </small>
+          <small class="m-2 ml-3">
+            <% if current_user == @user %>
+              <%= link_to 'Edit Profile', edit_profile_path(@user), class: "border rounded border-primary p-1 "%>
+            <% end %>
+          </small>
         </div>
         <div class="row my-2">
             <span class=""> <%= @user.bio %> </span>
@@ -33,6 +33,65 @@
              height="100" width="100">
       </div>
     </div>
+
+    <% @user.posts.each do |post| %>
+      <div class="row my-4">
+        <div class="border rounded p-2">
+          <div class="m-2">
+            <table>
+              <tr>
+                <td rowspan="2">
+                  <small><img class="rounded-circle float mr-2" "
+                       src="<%= @user.avatar.url %>"
+                       height="40" width="40"
+                       alt="post_image">
+                  </small>
+                </td>
+                <td>
+                  <small>
+                    <strong><%= link_to @user.full_name, class:"text-dark" %></strong>
+                  </small>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <small>
+                  <%= time_ago_in_words(post.updated_at) %> ago |
+                  <%= post.body.reading_time :format => :approx %> read
+                  </small>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <a class="nounderline" href="<%= post_path %>">
+            <div class="m-2">
+              <section>
+                <img class="my-4"
+                   src="<%= post.image.url %>"
+                   height="191" width="550"
+                   alt="post_image">
+                <span class="text-dark py-2">
+                  <h3><%= post.title %></h3>
+                  <p>
+                    <%= post.body[0..100].html_safe %>
+                    <% if post.body.size > 200 %>
+                      ...
+                    <% end %>
+                  </p>
+                </span>
+              </section>
+              <span class="text-dark">
+                <small> <%= post.comments.count %> Comments </small>
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    <% end%>
+
   </div>
-  <div class="col-2"></div>
+  <div class="col-3"></div>
 </div>
