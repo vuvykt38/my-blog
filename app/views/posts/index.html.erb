@@ -24,7 +24,7 @@
              class="rounded-circle float"
              alt="avatar"
              height="24" width="24">
-        <small class="ml-1"><%= post.author.full_name %> · <%= time_ago_in_words(post.updated_at) %> ago · <%= post.body.reading_time :format => :approx %> read</small>
+        <small class="ml-1"><%= link_to post.author.full_name, profile_path(post.author.id), class:"text-dark" %> · <%= time_ago_in_words(post.updated_at) %> ago · <%= post.body.reading_time :format => :approx %> read</small>
       </div>
       <div class="row p-1">
         <% if current_user == post.author %>
