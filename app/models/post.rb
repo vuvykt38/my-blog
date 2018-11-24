@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :posts_for, ->(user) { where('status = ? OR user_id = ?', 'public', user&.id) }
+  scope :search_by, ->(keyword) { where('body || title LIKE ?', "%#{keyword}%") }
 
   after_create :notify_followers
 

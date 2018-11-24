@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     end
 
     @posts = @posts.posts_for(current_user)
+    @posts = @posts.search_by(params[:query])
   end
 
   def show

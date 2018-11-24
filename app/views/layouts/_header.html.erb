@@ -48,11 +48,19 @@
           </div>
         </li>
       <% end %>
+
+      <%= form_tag posts_path, :method => 'get', :class => 'form-inline my-2 my-lg-0' do %>
+        <span class="mr-sm-2">
+          <%= text_field_tag :query, params[:query], :class => 'form-control' %>
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-outline-success my-2 my-sm-0' %>
+        </span>
+      <% end %>
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
+    <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    </form> -->
+
   </div>
 </nav>
