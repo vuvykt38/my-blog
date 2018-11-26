@@ -1,0 +1,87 @@
+// Place all the styles related to the Games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// $board-image =
+
+#game-board {
+  .cell {
+    &.selected {
+      background-color:  red !important;
+    }
+  }
+
+  .white-king {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: 0px 0px;
+  }
+
+  .white-queen {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -70px 0px;
+  }
+
+  .white-bishop {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -140px 0px;
+  }
+
+  .white-horse {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -210px 0px;
+  }
+
+  .white-rook {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -280px 0px;
+  }
+
+  .white-pawn {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -350px 0px;
+  }
+
+
+  .black-king {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: 0px 70px;
+  }
+
+  .black-queen {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -70px 70px;
+  }
+
+  .black-bishop {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -140px 70px;
+  }
+
+  .black-horse {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -210px 70px;
+  }
+
+  .black-rook {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -280px 70px;
+  }
+
+  .black-pawn {
+    background-image: image-url('chess-board2.png');
+    background-size: 420px;
+    background-position: -350px 70px;
+  }
+
+}

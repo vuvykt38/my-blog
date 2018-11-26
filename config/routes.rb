@@ -33,5 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :games
+
   root 'posts#index'
 end
