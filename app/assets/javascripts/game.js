@@ -24,8 +24,9 @@
 
 
 $(document).ready(function() {
+  const GAME_ID = 12324123;
 
-  var PIECES = ['white-king',
+  const PIECES = ['white-king',
                 'white-bishop',
                 'white-horse',
                 'white-rook',
@@ -37,29 +38,47 @@ $(document).ready(function() {
                 'black-rook',
                 'black-pawn'];
 
+  function sendMovementToServer(from, to) {
+    let url = '/games/' + GAME_ID + '/move';
+
+    return $.post(url, { from: from, to: to });
+  }
+
   function movePiece(from, to) {
-    var fromPiece = $('#' + from).attr("class").split(' ').filter(element => PIECES.indexOf(element) > -1);
+    console.log('Moving piece from: ' + from + ' to: ' + to);
+
+    sendMovementToServer(from, to).then((data) => {
+      console.log('success move');
+      console.log(data);
+    }, (resonse) => {
+      console.log('failed move');
+      console.log(data.responseJSON);
+
+      // debugger
+    });
+
+    let fromPiece = $('#' + from).attr("class").split(' ').filter(element => PIECES.indexOf(element) > -1);
 
     $('#' + from).removeClass(fromPiece);
 
     // Clear target cell
-    var toPiece = $('#' + to).attr("class").split(' ').filter(element => PIECES.indexOf(element) > -1);
+    let toPiece = $('#' + to).attr("class").split(' ').filter(element => PIECES.indexOf(element) > -1);
     $('#' + to).removeClass(toPiece);
 
 
     $('#' + to).addClass(fromPiece);
-    console.log('Moving piece from: ' + from + ' to: ' + to);
   }
 
 
+
   $('#game-board .cell').click(function(event) {
-    var selectedCell = $('.cell.selected')[0]
+    let selectedCell = $('.cell.selected')[0]
 
     if (selectedCell) {
       $(selectedCell).removeClass('selected');
       movePiece(selectedCell.id, event.target.id );
     } else {
-      var selectedCellPiece = $(event.target).attr("class").split(' ').filter(element => PIECES.indexOf(element) > -1);
+      let selectedCellPiece = $(event.target).attr("class").split(' ').filter(element => PIECES.indexOf(element) > -1);
 
       if (selectedCellPiece.length == 0) {
         return;

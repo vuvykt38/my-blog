@@ -33,7 +33,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :games
+  resources :games, only: [:show] do
+    member do
+      post :move
+    end
+  end
 
   root 'posts#index'
 end
