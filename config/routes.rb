@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :games, only: [:show] do
+  resources :games, only: [:show, :index] do
     member do
       post :move
     end

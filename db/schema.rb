@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_143807) do
+ActiveRecord::Schema.define(version: 2018_12_01_055608) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 2018_11_13_143807) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "message"
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -58,6 +65,20 @@ ActiveRecord::Schema.define(version: 2018_11_13_143807) do
     t.string "commentable_type"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "black_player_id"
+    t.bigint "white_player_id"
+    t.boolean "public", default: true
+    t.string "status"
+    t.string "player_turn"
+    t.json "board"
+    t.integer "move_timeout"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["black_player_id"], name: "index_games_on_black_player_id"
+    t.index ["white_player_id"], name: "index_games_on_white_player_id"
   end
 
   create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -116,6 +137,8 @@ ActiveRecord::Schema.define(version: 2018_11_13_143807) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "games", "users", column: "black_player_id"
+  add_foreign_key "games", "users", column: "white_player_id"
   add_foreign_key "notifications", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"

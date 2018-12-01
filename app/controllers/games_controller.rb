@@ -1,4 +1,9 @@
 class GamesController < ApplicationController
+  def index
+    @games = Game.visible
+                 .page(Integer(params[:page] || 1))
+                 .per(10)
+  end
   def show; end
 
   def move
