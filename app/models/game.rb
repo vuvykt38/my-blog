@@ -47,9 +47,9 @@ class Game < ApplicationRecord
 
   def join!(user)
     if !black_player.present?
-      update(black_player, user)
+      update(black_player: user)
     elsif !white_player.present?
-      update(white_player, user)
+      update(white_player: user)
     else
       errors.add(:player, 'The game already has two players!')
       false

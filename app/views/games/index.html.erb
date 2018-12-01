@@ -1,0 +1,14 @@
+<% @games.each do |game| %>
+  <div class="row content">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="row">
+      <%= game.black_player&.full_name %>
+      <%= game.white_player&.full_name %>
+
+      <%= link_to 'Join', join_game_path(game), method: :post %>
+      <%= link_to 'Watch', game_path(game) %>
+    </div>
+  </div>
+  <div class="col-2"></div>
+<% end %>
