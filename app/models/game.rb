@@ -56,6 +56,13 @@ class Game < ApplicationRecord
     end
   end
 
+  def move(from, to)
+    new_board = board
+    new_board[to] = new_board[from]
+    new_board.delete(from)
+    update(board: new_board)
+  end
+
   def self.new_game_for(user, params)
     player = ['black_player', 'white_player'].sample
     Game.new(params.merge(player => user, player_turn: player))
