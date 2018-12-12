@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   has_many :notifications
 
+  has_many :messages
+
   def following?(user)
     following_relationships.exists?(followed_id: user.id)
   end

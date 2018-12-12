@@ -36,6 +36,7 @@ class Game < ApplicationRecord
     '8h': 'black-rook'
   }.freeze
   scope :visible, -> { where(public: true)}
+  has_many :messages
   belongs_to :black_player, class_name: 'User', required: false
   belongs_to :white_player, class_name: 'User', required: false
 

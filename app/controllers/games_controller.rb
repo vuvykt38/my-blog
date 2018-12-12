@@ -21,10 +21,10 @@ class GamesController < ApplicationController
   end
 
   def show
-    game = Game.find(params[:id])
+    @game = Game.find(params[:id])
     respond_to do |format|
       format.html { render }
-      format.json { render json: { board: game.board } }
+      format.json { render json: { board: @game.board } }
     end
   end
 

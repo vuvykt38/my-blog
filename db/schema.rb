@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_055608) do
+ActiveRecord::Schema.define(version: 2018_12_10_141731) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 2018_12_01_055608) do
     t.index ["white_player_id"], name: "index_games_on_white_player_id"
   end
 
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "game_id"
+    t.text "body"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_messages_on_game_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "image"
     t.string "full_name"
@@ -139,6 +149,8 @@ ActiveRecord::Schema.define(version: 2018_12_01_055608) do
   add_foreign_key "comments", "users"
   add_foreign_key "games", "users", column: "black_player_id"
   add_foreign_key "games", "users", column: "white_player_id"
+  add_foreign_key "messages", "games"
+  add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"

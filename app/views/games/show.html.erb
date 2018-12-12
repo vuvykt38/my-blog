@@ -1,6 +1,5 @@
 <div class="row content">
-  <div class="col-2"></div>
-  <div class="col-8">
+  <div class="col-7">
     <table class="my-5" id='game-board'>
       <tr>
         <td class="text-center text-secondary pr-2">8</td>
@@ -115,7 +114,40 @@
     </table>
 
   </div>
-  <div class="col-2"></div>
+  <div class="col-5">
+    <div class="border my-5 p-2 ">
+      <div id="messages" class="m-2 ex1">
+        <% @game.messages.each do |message| %>
+          <div class="row my-2">
+            <div class="col-1">
+              <img src="<%= message.user.avatar.url %>"
+                 class="rounded-circle float"
+                 alt="avatar"
+                 height="24" width="24">
+            </div>
+            <div class="col-10 rounded bg-secondary text-white mx-2">
+              <%= message.body %>
+            </div>
+          </div>
+          <p class="text-right pr-2">
+            <small><%= message.created_at %></small>
+          </p>
+        <% end -%>
+      </div>
+      <div>
+        <%= form_with(model: [@game, @game.messages.build]) do |form| %>
+          <div class="row">
+            <div class="form-group col-9">
+              <%= form.text_area :body, class: "form-control", placeholder: "Write a messages..." %>
+            </div>
+            <div class="form-actions col-3">
+              <%= form.submit "Submit" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= javascript_include_tag 'game' %>

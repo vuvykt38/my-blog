@@ -38,6 +38,9 @@ Rails.application.routes.draw do
       post :join
       post :move
     end
+
+    resources :messages, only: [:index, :create] do
+    end
   end
 
   root 'posts#index'
