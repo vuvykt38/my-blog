@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [:index]
+  resources :notifications, only: [:index, :show]
 
   resources :profiles do
     member do

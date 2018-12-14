@@ -22,9 +22,11 @@
         <li class="nav-item">
           <a class="nav-link" href="<%= new_post_path(@post) %>">Write Article</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= notifications_path(@post) %>">Notifications(<%= current_user.notifications.count%>)</a>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= notifications_path(@post) %>">Notifications(<%= current_user.notifications.unread.count %>)</a>
+          </li>
+        <% end %>
       </ul>
     </ul>
     <ul class="nav justify-content-end">

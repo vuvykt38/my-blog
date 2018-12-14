@@ -10,11 +10,11 @@ class Comment < ApplicationRecord
   def notify_author
     return unless commentable.is_a?(Post)
     author = commentable.author
-      author.notifications.create(
-        title: "has commented on your post: #{commentable.title} ",
-        full_name: user.full_name,
-        image: user.avatar.url,
-        link: Rails.application.routes.url_helpers.post_path(id)
-      )
+    author.notifications.create(
+      title: "has commented on your post: #{commentable.title} ",
+      full_name: user.full_name,
+      image: user.avatar.url,
+      link: Rails.application.routes.url_helpers.post_path(commentable.id)
+    )
   end
 end

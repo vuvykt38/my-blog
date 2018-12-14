@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :following_relationships, class_name: 'Relationship', foreign_key: :follower_id
   has_many :following_users, through: :following_relationships, source: :followed
 
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
   has_many :messages
 

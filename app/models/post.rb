@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   STATUSES = %w[public draft]
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :author, class_name: 'User', foreign_key: :user_id
   belongs_to :category
   validates :title, presence: true,
@@ -12,6 +12,7 @@ class Post < ApplicationRecord
   scope :search_by, ->(keyword) { where('body || title LIKE ?', "%#{keyword}%") }
 
   after_create :notify_followers
+  has_many :notifications, dependent: :destroy
 
   private
 

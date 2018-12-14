@@ -8,8 +8,8 @@
                src="<%= notification.image %>"
                height="30" width="30"
                alt="post_image">
-        <a href="<%= notification.link %>">
-        <b><%= notification.full_name %></b> <span><%= notification.title %></span>
+          <a class="<%= notification.read ? 'text-dark' : '' %>" href="<%= notification_path(notification) %>">
+            <b><%= notification.full_name %></b> <span><%= notification.title %></span>
           </a>
       </div>
     <% end %>
