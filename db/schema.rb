@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_160652) do
+ActiveRecord::Schema.define(version: 2018_12_22_080223) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 2018_12_12_160652) do
     t.string "commentable_type"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "conversations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "first_participate_id"
+    t.bigint "second_participate_id"
+    t.bigint "last_message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["first_participate_id"], name: "index_conversations_on_first_participate_id"
+    t.index ["last_message_id"], name: "index_conversations_on_last_message_id"
+    t.index ["second_participate_id"], name: "index_conversations_on_second_participate_id"
   end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
