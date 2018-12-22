@@ -117,6 +117,17 @@ ActiveRecord::Schema.define(version: 2018_12_12_160652) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "private_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "body"
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.boolean "read", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_private_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_private_messages_on_sender_id"
+  end
+
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"

@@ -19,6 +19,10 @@ class User < ApplicationRecord
 
   has_many :messages
 
+  def private_messages
+    PrivateMessage.where('sender_id = :sender_id OR receiver_id = :receiver_id', sender_id: id, receiver_id: id)
+  end
+
   def following?(user)
     following_relationships.exists?(followed_id: user.id)
   end
