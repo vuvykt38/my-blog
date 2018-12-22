@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_080223) do
+ActiveRecord::Schema.define(version: 2018_12_22_082710) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2018_12_22_080223) do
     t.boolean "read", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "conversation_id"
+    t.index ["conversation_id"], name: "index_private_messages_on_conversation_id"
     t.index ["receiver_id"], name: "index_private_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_private_messages_on_sender_id"
   end
@@ -177,6 +179,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_080223) do
   add_foreign_key "notifications", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
+  add_foreign_key "private_messages", "conversations"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
 end
