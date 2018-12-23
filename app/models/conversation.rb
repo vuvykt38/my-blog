@@ -7,6 +7,7 @@ class Conversation < ApplicationRecord
   scope :conversations_of, lambda { |user|
     where('second_participate_id = :user_id OR first_participate_id = :user_id',
           user_id: user.id)
+    .order(updated_at: :desc)
   }
 
   def self.conversation_for(user_id, other_id)
