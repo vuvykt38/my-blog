@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :private_messages, only: [:index] do
+  resources :conversations, only: [:index] do
   end
 
   root 'posts#index'

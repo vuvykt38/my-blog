@@ -34,20 +34,20 @@
               <div class="chat_list active_chat">
                 <div class="chat_people">
                   <div class="chat_img">
-                    <img src="<%= conversation.sender.avatar.url %>"
+                    <img src="<%= conversation.other_user(current_user).avatar.url %>"
                          class="rounded-circle float"
                          alt="avatar"
                          height="43" width="43">
                   </div>
                   <div class="chat_ib">
                     <h5>
-                      <%= conversation.sender.full_name %>
+                      <%= conversation.other_user(current_user).full_name %>
                       <span class="chat_date"><%= conversation.message_time %></span>
                     </h5>
                     <p>
-                      <%= conversation.last_message %>
-                      <% if conversation.last_message.size < 70 %>
-                        <%= conversation.last_message %>
+                      <%= conversation.last_message.body[-70..-1] %>
+                      <% if conversation.last_message.body.size < 70 %>
+                        <%= conversation.last_message.body %>
                       <% end %>
                     </p>
                   </div>
