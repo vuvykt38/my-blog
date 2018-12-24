@@ -4,10 +4,12 @@ class PostsController < ApplicationController
   def index
     if params[:category_id]
       @posts = Post.where(category_id: params[:category_id])
+                   .order(updated_at: :desc)
                    .page(Integer(params[:page] || 1))
                    .per(10)
     else
       @posts = Post.page(Integer(params[:page] || 1))
+                   .order(updated_at: :desc)
                    .per(10)
     end
 
