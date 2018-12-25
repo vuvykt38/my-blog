@@ -46,7 +46,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<%= profile_path(current_user) %>">Profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="<%= private_messages_path %>">Messages(<%= current_user.private_messages.unread.count %>) </a>
+            <a class="dropdown-item" href="<%= conversations_path %>">Messages(<%= current_user.private_messages.unread.count %>) </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" >Log Out</a>
           </div>

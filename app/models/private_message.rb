@@ -1,6 +1,6 @@
 class PrivateMessage < ApplicationRecord
   belongs_to :sender, class_name: 'User'
-  belongs_to :receiver, class_name: 'User'
+  belongs_to :receiver, class_name: 'User', optional: true
   belongs_to :conversation
 
   scope :unread, -> { where.not(read: true) }
@@ -8,6 +8,10 @@ class PrivateMessage < ApplicationRecord
 
   def message_time
     created_at.strftime("%b %d")
+  end
+
+  def message_hour
+    created_at.strftime("%I:%M %p")
   end
 
   private
