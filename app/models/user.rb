@@ -19,6 +19,9 @@ class User < ApplicationRecord
 
   has_many :messages
 
+  has_many :user_conversations
+  has_many :conversations, through: :user_conversations
+
   def following?(user)
     following_relationships.exists?(followed_id: user.id)
   end
