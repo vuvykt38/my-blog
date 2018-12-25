@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_24_165353) do
+ActiveRecord::Schema.define(version: 2018_12_25_052455) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -131,13 +131,11 @@ ActiveRecord::Schema.define(version: 2018_12_24_165353) do
   create_table "private_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body"
     t.bigint "sender_id"
-    t.bigint "receiver_id"
     t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "conversation_id"
     t.index ["conversation_id"], name: "index_private_messages_on_conversation_id"
-    t.index ["receiver_id"], name: "index_private_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_private_messages_on_sender_id"
   end
 
@@ -149,6 +147,16 @@ ActiveRecord::Schema.define(version: 2018_12_24_165353) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "user_conversations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "conversation_id"
+    t.bigint "user_id"
+    t.boolean "unread", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["user_id"], name: "index_user_conversations_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -182,4 +190,6 @@ ActiveRecord::Schema.define(version: 2018_12_24_165353) do
   add_foreign_key "private_messages", "conversations"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "user_conversations", "conversations"
+  add_foreign_key "user_conversations", "users"
 end
