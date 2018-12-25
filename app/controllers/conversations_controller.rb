@@ -8,6 +8,6 @@ class ConversationsController < ApplicationController
 
   def show
     @conversations = Conversation.conversations_of(current_user)
-    @conversation = Conversation.find(params[:id])
+    @conversation = current_user.conversations.find(params[:id])
   end
 end
