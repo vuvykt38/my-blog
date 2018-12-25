@@ -4,7 +4,7 @@ class CreatePrivateMessages < ActiveRecord::Migration[5.2]
       t.text :body
       t.references :sender, index: true, foreigner_key: { to_table: :users }
       t.references :receiver, index: true, foreigner_key: { to_table: :users }
-      t.boolean :read, default: :false
+      t.boolean :read, default: :true
 
       t.timestamps
     end
