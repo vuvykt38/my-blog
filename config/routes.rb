@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :conversations, only: [:index] do
+  resources :conversations, only: [:index, :show] do
   end
 
   root 'posts#index'

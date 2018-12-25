@@ -1,0 +1,19 @@
+<% if incoming %>
+  <div class="incoming_msg">
+    <div class="incoming_msg_img">
+      <img src="<%= avatar_url %>" class="rounded-circle float" alt="avatar" height="35" width="35">
+    </div>
+
+    <div class="received_msg">
+      <div class="received_withd_msg">
+        <p> <%= message_body %></p>
+        <span class="time_date"> <%= sent_time %>    |    <%= sent_date %></span></div>
+    </div>
+  </div>
+<% else %>
+  <div class="outgoing_msg">
+    <div class="sent_msg">
+      <p> <%= message_body %></p>
+      <span class="time_date"> <%= sent_time %>    |    <%= sent_date %></span></div>
+  </div>
+<% end %>
