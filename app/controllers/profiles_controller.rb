@@ -5,6 +5,14 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def message
+    user = User.find(params[:id])
+    conversation = Conversation.between(user.id, current_user.id).first_or_create
+    UserConversation.find_or_create_by(user: user, conversation: conversation)
+    UserConversation.find_or_create_by(user: current_user, conversation: conversation)
+    redirect_to conversation_path(conversation)
+  end
+
   def edit;end
 
   def update

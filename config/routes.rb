@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [:show, :edit, :update]
   resources :relationships, only: [:create] do
     collection do
       post :unfollow
@@ -26,10 +25,11 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [:index, :show]
 
-  resources :profiles do
+  resources :profiles, only: [:show, :edit, :update] do
     member do
       get :following
       get :followers
+      get :message
     end
   end
 
