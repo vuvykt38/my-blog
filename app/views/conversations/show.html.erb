@@ -20,7 +20,6 @@
               <div class="recent_heading">
                 <h4>Recent</h4>
               </div>
-              <div class="srch_bar">
               <!-- <div class="srch_bar">
                 <div class="stylish-input-group">
                   <input type="text" class="search-bar"  placeholder="Search" >
@@ -33,7 +32,7 @@
             <div class="inbox_chat">
               <% @conversations.each do |conversation| %>
 
-                <%= render partial: 'chat_list_conversation_item', locals: { avatar: conversation.other_user(current_user).avatar.url, sender_name: conversation.other_user(current_user).full_name, sent_at: conversation.message_time, message: conversation.last_message.body.last(70), link: conversation_path(conversation) } %>
+                <%= render partial: 'chat_list_conversation_item', locals: { avatar: conversation.other_user(current_user).avatar.url, sender_name: conversation.other_user(current_user).full_name, sent_at: conversation.message_time, message: conversation.last_message&.body&.last(70), link: conversation_path(conversation) } %>
               <% end %>
 
               <% 5.times do %>

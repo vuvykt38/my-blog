@@ -1,6 +1,6 @@
 class Conversation < ApplicationRecord
-  has_many :private_messages
-  has_many :user_conversations
+  has_many :private_messages, dependent: :destroy
+  has_many :user_conversations, dependent: :destroy
   has_many :users, through: :user_conversations
 
   # TODO:  remove first_participate and second_participate when everyone migrated
