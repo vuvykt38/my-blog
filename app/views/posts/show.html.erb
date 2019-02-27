@@ -13,13 +13,15 @@
         <td>
           <small>
             <strong><%= link_to @post.author.full_name, profile_path(@post.author.id), class:"text-dark" %></strong>
-            <span class="border rounded border-primary px-1 py-0.5 ml-1">
-            <% if !current_user.following?(@post.author) %>
-              <%= link_to 'Follow', relationships_path(user_id: @post.author.id), method: :post %>
-            <% else %>
-              <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @post.author.id), method: :post %>
+            <% if user_signed_in? %>
+              <span class="border rounded border-primary px-1 py-0.5 ml-1">
+                <% if !current_user.following?(@post.author)  %>
+                  <%= link_to 'Follow', relationships_path(user_id: @post.author.id), method: :post %>
+                <% else %>
+                  <%= link_to 'Unfollow', unfollow_relationships_path(user_id: @post.author.id), method: :post %>
+                <% end %>
+              </span>
             <% end %>
-            </span>
           </small>
         </td>
       </tr>
