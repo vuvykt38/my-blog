@@ -1,24 +1,31 @@
-# README
+# My Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple demo blog application written in Ruby on Rails.
+You can view this application live on Heroku
 
-Things you may want to cover:
+# Features
+Main functionalities which the app will have:
+- Authentication (with Devise)
+- Ability to publish posts, search, categorize and comment them
+- Social share buttons
+- Messaging
+- Notifications
+- Follow/unfollow user
 
-* Ruby version
+# Stack
+- Ruby, Ruby On Rails
+- CSS, HTML, Bootstrap, Git
+- Refactoring: helpers, partials, concerns, design patterns
+- Testing: TDD/BDD (RSpec), Factories (Factory Girl)
+- Storage: MySQL
 
-* System dependencies
+# How To Run
+To get started:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ git clone https://github.com/vuvykt38/my-blog.git
+$ cd my-blog
+$ bundle install
+$ rake db:migrate
+$ rails s
+```
