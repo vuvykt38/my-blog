@@ -22,4 +22,5 @@ test:
   database: my_blog_test
 
 production:
+  adapter: mysql2
   url: <%= ENV['DATABASE_URL'] %>
