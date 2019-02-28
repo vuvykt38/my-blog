@@ -1,7 +1,7 @@
 # My Blog
 
 This is a simple demo blog application written in Ruby on Rails.
-You can view this application live on Heroku
+You can view this application live on [Heroku](https://my-blog-vy.herokuapp.com/)
 
 # Features
 Main functionalities which the app will have:
