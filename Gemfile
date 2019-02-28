@@ -94,3 +94,5 @@ gem 'rmagick', '~> 2.16'
 
 # Create a share feature
 gem 'social-share-button'
+
+gem "fog-aws", "~> 3.3"
