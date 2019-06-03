@@ -1,12 +1,12 @@
 CarrierWave.configure do |config|
-  config.fog_provider = 'fog/aws'                        # required
+  config.fog_provider = 'fog/aws'
   config.fog_credentials = {
-    provider:              'AWS',                        # required
-    aws_access_key_id:     ENV['AWS_ACCESS_KEY'],     # required unless using use_iam_profile
-    aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],                        # required unless using use_iam_profile
-    region:                'us-east-2',                  # optional, defaults to 'us-east-1'
+    provider: 'AWS',
+    aws_access_key_id: Rails.application.credentials.aws[:access_key_id],
+    aws_secret_access_key: Rails.application.credentials.aws[:secret_access_key],
+    region: 'us-east-2',
   }
-  config.fog_directory  = 'vyblog'                                      # required
-  config.fog_public     = false                                                 # optional, defaults to true
-  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
+  config.fog_directory  = 'vyblog'
+  config.fog_public     = false
+  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
 end
