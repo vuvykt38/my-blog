@@ -1,0 +1,8 @@
+# NOTE: Only put non-secret env variable here, this would be committed to git
+# use credentials to store the secrets
+production:
+  s3_bucket: vyblog
+  s3_region: us-east-2
+development:
+  s3_bucket: vyblog-development
+  s3_region: ap-southeast-1

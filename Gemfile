@@ -96,3 +96,6 @@ gem 'rmagick', '~> 2.16'
 gem 'social-share-button'
 
 gem "fog-aws", "~> 3.3"
+
+#
+gem 'figaro', '~> 1.1', '>= 1.1.1'

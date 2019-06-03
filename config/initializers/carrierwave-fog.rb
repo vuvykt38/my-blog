@@ -4,9 +4,9 @@ CarrierWave.configure do |config|
     provider: 'AWS',
     aws_access_key_id: Rails.application.credentials.aws[:access_key_id],
     aws_secret_access_key: Rails.application.credentials.aws[:secret_access_key],
-    region: 'us-east-2',
+    region: ENV['s3_region']
   }
-  config.fog_directory  = 'vyblog'
+  config.fog_directory  = ENV['s3_bucket']
   config.fog_public     = false
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
 end
