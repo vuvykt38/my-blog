@@ -87,7 +87,7 @@ gem 'readingtime'
 gem 'activeadmin'
 
 # Upload files
-gem 'carrierwave', '~> 1.2', '>= 1.2.3'
+gem 'carrierwave', '~> 1.3'
 
 # Image resize
 gem 'rmagick', '~> 2.16'
